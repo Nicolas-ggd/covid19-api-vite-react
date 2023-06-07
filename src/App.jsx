@@ -11,6 +11,7 @@ function App() {
           <Route exact path="/login" element={<Login />}></Route>
         </Routes>
         <div>
+          <button class="rounded-none bg-cyan-400">Save Changes</button>
           <Link to="/">Home</Link>
           <Link to="/login">Login</Link>
         </div>
