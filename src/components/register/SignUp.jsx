@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 export const SignUp = ({ closeSignUp }) => {
     const [isError, setIsError] = useState(false);
@@ -108,17 +109,17 @@ export const SignUp = ({ closeSignUp }) => {
                                     }}
                                 />
                             </div>
-                            {isError && signUpData?.password?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill the password</span>}
+                            {isError && signUpData?.password?.length === 0 && <span style={{ color: "red", margin: "3px" }}>Please fill in the password</span>}
 
-                            <div>
+
+                            <div className="relative">
                                 <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
                                 <input
-                                    style={{ borderColor: isError && signUpData?.confirmPassword !== signUpData?.password || isError && signUpData?.confirmPassword?.length === 0 ? 'red' : '' }}
+                                    style={{ borderColor: isError && signUpData?.confirmPassword !== signUpData?.password || isError && signUpData?.confirmPassword?.length === 0 ? 'red' : signUpData?.confirmPassword === signUpData?.password && signUpData?.confirmPassword ? 'green' : '' }}
                                     type="password"
-                                    name="password"
-                                    id="password"
+                                    name="confirmedPassword"
                                     placeholder="••••••••"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+                                    className="relative bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
                                     required=""
                                     onChange={(e) => {
                                         setSignUpData((prevSendData) => ({
@@ -127,8 +128,13 @@ export const SignUp = ({ closeSignUp }) => {
                                         }));
                                     }}
                                 />
+                                {signUpData?.password === signUpData?.confirmPassword && signUpData?.confirmPassword &&
+                                <CheckCircleOutlineIcon
+                                    className="absolute bottom-2 right-2"
+                                    style={{ color: signUpData?.confirmPassword === signUpData?.password ? 'green' : '' }}
+                                />}
                             </div>
-                            {isError && signUpData?.confirmPassword !== signUpData?.password || isError && signUpData?.confirmPassword?.length === 0 && <span style={{ color: "red", margin: "3px" }}>Confirmed password is incorrect!</span>}
+                            {isError && (signUpData?.confirmPassword !== signUpData?.password || signUpData?.confirmPassword?.length === 0) && <span style={{ color: "red", margin: "3px" }}>Confirmed password is incorrect!</span>}
 
                             <div className="flex items-start">
                                 <div className="flex items-center h-5">
