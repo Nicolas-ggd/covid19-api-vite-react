@@ -68,7 +68,7 @@ export const SignUp = ({ closeSignUp }) => {
                                     }}
                                 />
                             </div>
-                            {isError && signUpData?.name?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill name</span>}
+                            {isError && signUpData?.name?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill the name</span>}
 
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
@@ -88,7 +88,7 @@ export const SignUp = ({ closeSignUp }) => {
                                     }}
                                 />
                             </div>
-                            {isError && signUpData?.email?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill email</span>}
+                            {isError && signUpData?.email?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill the email</span>}
 
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
@@ -108,7 +108,7 @@ export const SignUp = ({ closeSignUp }) => {
                                     }}
                                 />
                             </div>
-                            {isError && signUpData?.password?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill password</span>}
+                            {isError && signUpData?.password?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill the password</span>}
 
                             <div>
                                 <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
