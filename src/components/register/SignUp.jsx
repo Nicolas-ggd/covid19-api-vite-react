@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
+import { Notification } from "../notification/Notification";
+
 export const SignUp = ({ closeSignUp }) => {
     const [isError, setIsError] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
+    const [isNotified, setIsNotified] = useState(false);
     const [signUpData, setSignUpData] = useState({
         name: "",
         email: "",
@@ -34,6 +37,7 @@ export const SignUp = ({ closeSignUp }) => {
             password: signUpData?.password,
         })
             .then(() => {
+                setIsNotified(true);
                 closeSignUp();
             });
     };
@@ -129,10 +133,10 @@ export const SignUp = ({ closeSignUp }) => {
                                     }}
                                 />
                                 {signUpData?.password === signUpData?.confirmPassword && signUpData?.confirmPassword &&
-                                <CheckCircleOutlineIcon
-                                    className="absolute bottom-2 right-2"
-                                    style={{ color: signUpData?.confirmPassword === signUpData?.password ? 'green' : '' }}
-                                />}
+                                    <CheckCircleOutlineIcon
+                                        className="absolute bottom-2 right-2"
+                                        style={{ color: signUpData?.confirmPassword === signUpData?.password ? 'green' : '' }}
+                                    />}
                             </div>
                             {isError && (signUpData?.confirmPassword !== signUpData?.password || signUpData?.confirmPassword?.length === 0) && <span style={{ color: "red", margin: "3px" }}>Confirmed password is incorrect!</span>}
 
@@ -162,6 +166,7 @@ export const SignUp = ({ closeSignUp }) => {
                         </form>
                     </div>
                 </div>
+                {isNotified && <Notification />}
             </div>
         </section>
     );
