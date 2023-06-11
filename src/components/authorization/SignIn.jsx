@@ -2,13 +2,21 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { ForgotPassword } from "../forgotPassword/ForgotPassword";
+
 export const SignIn = ({ closeSignIn }) => {
     const navigate = useNavigate();
     const [isError, setIsError] = useState(false);
+    const [isForgot, setIsForgot] = useState(false);
     const [signInData, setSignInData] = useState({
         email: "",
         password: "",
     });
+
+    const toggleForgotPassword = () => {
+        console.log('click')
+        setIsForgot(prevIsForgot => !prevIsForgot);
+    };
 
     const submitSignInData = async (event) => {
         if (signInData?.email?.length === 0 || signInData?.password?.length === 0) {
@@ -30,7 +38,7 @@ export const SignIn = ({ closeSignIn }) => {
 
     return (
         <section className="bg-gray-50 dark:bg-gray-900">
-            <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            {!isForgot && <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
                     <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
                     Flowbite
@@ -90,7 +98,7 @@ export const SignIn = ({ closeSignIn }) => {
                                         <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
                                     </div>
                                 </div>
-                                <a className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
+                                <a onClick={toggleForgotPassword} className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                             </div>
 
                             <button onClick={submitSignInData} type="button" className="w-full text-white bg-sky-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 outline-none">Sign in</button>
@@ -100,7 +108,8 @@ export const SignIn = ({ closeSignIn }) => {
                         </form>
                     </div>
                 </div>
-            </div>
+            </div>}
+            {isForgot && <ForgotPassword />}
         </section>
     );
 };
