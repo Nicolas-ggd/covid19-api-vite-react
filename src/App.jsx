@@ -9,12 +9,12 @@ function App() {
   return (
     <div className="w-screen h-screen bg-gray-50">
       <Router>
-        <Header />
+            {/* <Header /> */}
         <Routes>
           <Route element={<PrivateRoutes />}>
             <Route element={<Home />} exact path="/home" ></Route>
           </Route>
-        <Route exact path="/" element={<SignIn />}></Route>
+          <Route exact path="/" element={<SignIn />}></Route>
         </Routes>
 
       </Router>
