@@ -16,7 +16,7 @@ export const SignUp = ({ closeSignUp }) => {
     });
 
     const acceptTermsCheckbox = () => {
-        setIsChecked(true);
+        setIsChecked(prevIsChecked => !prevIsChecked);
     };
 
     const submitSignUpData = async (event) => {
