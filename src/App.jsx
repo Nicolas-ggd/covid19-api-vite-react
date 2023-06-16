@@ -4,6 +4,7 @@ import { PrivateRoutes } from "./utils/PrivateRoutes";
 import { Header } from "./components/header/Header";
 import { Home } from "./components/home/Home";
 import { Auth } from "./components/auth/Auth";
+import { ForgotPassword } from "./components/forgotPassword/ForgotPassword";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route element={<Home />} exact path="/home" ></Route>
           </Route>
           <Route exact path="/" element={<Auth />}></Route>
+          <Route exact path="/reset-password" element={<ForgotPassword />}></Route>
         </Routes>
 
       </Router>

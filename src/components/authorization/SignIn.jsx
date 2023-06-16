@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-
-import { ForgotPassword } from "../forgotPassword/ForgotPassword";
 
 export const SignIn = ({ closeSignIn }) => {
     const navigate = useNavigate();
@@ -97,7 +95,7 @@ export const SignIn = ({ closeSignIn }) => {
                                         <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
                                     </div>
                                 </div>
-                                <a onClick={toggleForgotPassword} className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer">Forgot password?</a>
+                                <Link onClick={toggleForgotPassword} to="/reset-password" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer">Forgot password?</Link>
                             </div>
 
                             <button onClick={submitSignInData} type="button" className="w-full transition delay-50 border-none text-white bg-sky-400 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 outline-none">Sign in</button>
@@ -108,7 +106,6 @@ export const SignIn = ({ closeSignIn }) => {
                     </div>
                 </div>
             </div>}
-            {isForgot && <ForgotPassword toggleForgotPassword={toggleForgotPassword} />}
         </section>
     );
 };
