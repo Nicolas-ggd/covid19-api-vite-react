@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useSearchParams, Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 import { Notification } from "../notification/Notification";
 
@@ -21,7 +22,7 @@ export const ForgotPassword = ({ toggleForgotPassword }) => {
     });
 
     const toggleNotification = () => {
-        setIsClosed(prevIsClosed => !prevIsClosed);
+        setIsSendInEmail(true);
     };
 
     const submitEmailToResetPassword = async () => {
@@ -38,11 +39,11 @@ export const ForgotPassword = ({ toggleForgotPassword }) => {
     };
 
     const submitUserToken = async (event) => {
-        event.preventDefault();
-        if (newPassword?.password?.length === 0 && newPassword?.confirmPassword?.length === 0) {
+        if (newPassword?.password?.length === 0 && newPassword?.confirmPassword?.length === 0 && newPassword?.password !== newPassword?.confirmPassword) {
             return setIsError(true)
         }
-        
+        event.preventDefault();
+
         if (searchToken.get("token")) {
             try {
                 await axios.post('http://localhost:8000/reset-password/user-token', {
@@ -133,14 +134,14 @@ export const ForgotPassword = ({ toggleForgotPassword }) => {
                                     {isError && newPassword?.password?.length === 0 && <span style={{ color: "red", margin: "3px" }}>Please enter the new password</span>}
                                 </div>
 
-                                <div>
+                                <div className="relative">
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
                                     <input
-                                        style={{ borderColor: isError && newPassword?.confirmPassword?.length === 0 ? 'red' : '' }}
+                                        style={{ borderColor: isError && newPassword?.confirmPassword !== newPassword?.password || isError && newPassword?.confirmPassword?.length === 0 ? 'red' : newPassword?.confirmPassword === newPassword?.password && newPassword?.confirmPassword ? 'green' : '' }}
                                         type="password"
                                         name="password"
                                         id="password"
-                                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+                                        className="relative bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
                                         placeholder="name@company.com"
                                         required=""
                                         onChange={(e) => {
@@ -150,10 +151,14 @@ export const ForgotPassword = ({ toggleForgotPassword }) => {
                                             }));
                                         }}
                                     />
-                                    {isError && newPassword?.confirmPassword?.length === 0 && <span style={{ color: "red", margin: "3px" }}>Please enter the confrim password</span>}
-
+                                    {newPassword?.password === newPassword?.confirmPassword && newPassword?.confirmPassword &&
+                                        <CheckCircleOutlineIcon
+                                            className="absolute bottom-2 right-2"
+                                            style={{ color: newPassword?.confirmPassword === newPassword?.password ? 'green' : '' }}
+                                        />}
                                 </div>
-                                <button  type="submit" className="w-full mt-2 transition delay-50 border-none text-white bg-sky-400 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 outline-none">Submit</button>
+                                {isError && (newPassword?.confirmPassword !== newPassword?.password || newPassword?.confirmPassword?.length === 0) && <span style={{ color: "red", margin: "3px" }}>Confirmed password is incorrect!</span>}
+                                <button onClick={submitUserToken} type="button" className="w-full mt-2 transition delay-50 border-none text-white bg-sky-400 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 outline-none">Submit</button>
                             </form>
                             <Link onClick={toggleForgotPassword} to="/" className="text-sm font-light text-primary-600 hover:underline cursor-pointer">
                                 Back to sign in.
@@ -162,7 +167,7 @@ export const ForgotPassword = ({ toggleForgotPassword }) => {
                     </div>
                 }
             </div>
-            {isSendInEmail && <Notification onClose={toggleNotification} message={'Reset password link sended in your email.'} />}
+            {isSendInEmail && <Notification onClose={() => setIsSendInEmail(false)} message={'Reset password link sent to your email.'} />}
         </section>
     );
 };
