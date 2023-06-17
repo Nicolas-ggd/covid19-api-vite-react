@@ -105,7 +105,7 @@ export const SignIn = ({ closeSignIn, themeClass, isDarkMode }) => {
                                             <input id="remember" aria-describedby="remember" type="checkbox" className={`w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 ${isDarkMode ? 'focus:ring-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800' : 'focus:ring-primary-300'}`} required="" />
                                         </div>
                                         <div className={`ml-3 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-500'}`}>
-                                            <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
+                                            <label htmlFor="remember" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Remember me</label>
                                         </div>
                                     </div>
                                     <button onClick={toggleForgotPassword} type="button" className={`text-sm font-medium text-primary-600 hover:underline ${isDarkMode ? 'dark:text-primary-500' : ''} cursor-pointer`}>
@@ -117,7 +117,7 @@ export const SignIn = ({ closeSignIn, themeClass, isDarkMode }) => {
                                     Sign in
                                 </button>
 
-                                <p className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                <p className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                                     Don't have an account yet?{' '}
                                     <a onClick={closeSignIn} className={`font-medium text-primary-600 hover:underline ${isDarkMode ? 'dark:text-primary-500' : ''} cursor-pointer outline-none`}>
                                         Sign up
