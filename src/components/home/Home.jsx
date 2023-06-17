@@ -1,6 +1,10 @@
+import { Header } from "../header/Header";
 
 export const Home = () => {
     return (
-        <div>Home Page</div>
+        <div>
+            <Header />
+            Home Page
+        </div>
     );
 };

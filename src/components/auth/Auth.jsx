@@ -3,7 +3,7 @@ import { useState } from "react";
 import { SignIn } from "../authorization/SignIn";
 import { SignUp } from "../register/SignUp";
 
-export const Auth = () => {
+export const Auth = ({ themeClass, isDarkMode }) => {
   const [isAuth, setIsAuth] = useState(true);
 
   const toggleAuth = () => {
@@ -13,9 +13,9 @@ export const Auth = () => {
   return (
     <>
       {isAuth ? (
-        <SignIn closeSignIn={toggleAuth} />
+        <SignIn closeSignIn={toggleAuth} themeClass={themeClass} isDarkMode={isDarkMode} />
       ) : (
-        <SignUp closeSignUp={toggleAuth} />
+        <SignUp closeSignUp={toggleAuth} themeClass={themeClass} isDarkMode={isDarkMode}/>
       )}
     </>
   );

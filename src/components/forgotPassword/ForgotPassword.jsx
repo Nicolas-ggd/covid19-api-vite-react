@@ -10,7 +10,6 @@ export const ForgotPassword = ({ toggleForgotPassword }) => {
     const [isError, setIsError] = useState(false);
     const [isSendingError, setIsSendingError] = useState(false);
     const [isSendInEmail, setIsSendInEmail] = useState(false);
-    const [isClosed, setIsClosed] = useState(false);
     const [resetData, setResetData] = useState({
         email: "",
     });
@@ -21,10 +20,6 @@ export const ForgotPassword = ({ toggleForgotPassword }) => {
         confirmPassword: "",
     });
 
-    const toggleNotification = () => {
-        setIsSendInEmail(true);
-    };
-
     const submitEmailToResetPassword = async () => {
         if (resetData?.email?.length === 0) {
             return setIsSendingError(true)
@@ -33,7 +28,7 @@ export const ForgotPassword = ({ toggleForgotPassword }) => {
         await axios.post('http://localhost:8000/reset-password', {
             email: resetData?.email
         })
-            .then((res) => {
+            .then(() => {
                 setIsSendInEmail(true);
             })
     };
@@ -167,7 +162,7 @@ export const ForgotPassword = ({ toggleForgotPassword }) => {
                     </div>
                 }
             </div>
-            {isSendInEmail && <Notification onClose={() => setIsSendInEmail(false)} message={'Reset password link sent to your email.'} />}
+            {isSendInEmail && <Notification onClose={() => setIsSendInEmail(false)} message={'Reset password link sent to your email.'} condition='success' />}
         </section>
     );
 };

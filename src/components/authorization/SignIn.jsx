@@ -1,15 +1,22 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
-export const SignIn = ({ closeSignIn }) => {
+import { Notification } from "../notification/Notification";
+
+export const SignIn = ({ closeSignIn, themeClass, isDarkMode }) => {
     const navigate = useNavigate();
     const [isError, setIsError] = useState(false);
+    const [isAuthnticate, setIsAuthnticate] = useState(false);
+    const [isErrorMessage, setIsErrorMessage] = useState('');
     const [isForgot, setIsForgot] = useState(false);
     const [signInData, setSignInData] = useState({
         email: "",
         password: "",
     });
+    const [searchVerifyCode, setSearchVerifyCode] = useSearchParams();
+    const searchParamsCode = searchVerifyCode.get("verifyCode")
+
 
     const toggleForgotPassword = () => {
         setIsForgot(prevIsForgot => !prevIsForgot);
@@ -24,88 +31,107 @@ export const SignIn = ({ closeSignIn }) => {
         await axios.post("http://localhost:8000/auth", {
             email: signInData.email,
             password: signInData.password,
+            verificationCode: searchParamsCode
         })
             .then((res) => {
                 const data = res.data;
                 localStorage.setItem('access_token', data?.access_token);
                 navigate('/home');
-                console.log(data);
-            });
+            })
+            .catch((res) => {
+                const error = res?.response?.data?.message;
+                setIsAuthnticate(true)
+                setIsErrorMessage(error)
+            })
     };
 
     return (
-        <section className="bg-gray-50 dark:bg-gray-900">
-            {!isForgot && <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                    <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
-                    Flowbite
-                </a>
-                <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                            Sign in to your account
-                        </h1>
-                        <form className="space-y-4 md:space-y-6" onSubmit={submitSignInData}>
-                            <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                <input
-                                    style={{ borderColor: isError && signInData?.email?.length === 0 ? 'red' : '' }}
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
-                                    placeholder="name@company.com"
-                                    required=""
-                                    onChange={(e) => {
-                                        setSignInData((prevSendData) => ({
-                                            ...prevSendData,
-                                            email: e.target.value
-                                        }));
-                                    }}
-                                />
-                            </div>
-                            {isError && signInData?.email?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill the email</span>}
-
-                            <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                <input
-                                    style={{ borderColor: isError && signInData?.password?.length === 0 ? 'red' : '' }}
-                                    type="password"
-                                    name="password"
-                                    id="password"
-                                    placeholder="••••••••"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
-                                    required=""
-                                    onChange={(e) => {
-                                        setSignInData((prevSendData) => ({
-                                            ...prevSendData,
-                                            password: e.target.value
-                                        }));
-                                    }}
-                                />
-                            </div>
-                            {isError && signInData?.password?.length === 0 && <span style={{ color: "red", margin: "3px" }}>Please fill the passowrd</span>}
-
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-start">
-                                    <div className="flex items-center h-5">
-                                        <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
-                                    </div>
-                                    <div className="ml-3 text-sm">
-                                        <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
-                                    </div>
+        <section className={`bg-gray-50 ${themeClass}`}>
+            {!isForgot && (
+                <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+                    <a href="#" className={`flex items-center mb-6 text-2xl font-semibold text-gray-900 ${isDarkMode ? 'text-white' : ''}`}>
+                        <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
+                        Flowbite
+                    </a>
+                    <div className={`w-full bg-white rounded-lg shadow ${isDarkMode ? 'dark:border' : 'md:border'} md:mt-0 sm:max-w-md xl:p-0 ${isDarkMode ? 'bg-gray-800 border-gray-800' : ''}`}>
+                        <div className={`p-6 space-y-4 md:space-y-6 sm:p-8 ${isDarkMode ? 'bg-gray-600' : 'text-white'}`}>
+                            <h1 className={`text-xl font-bold leading-tight tracking-tight md:text-2xl ${isDarkMode ? 'dark:text-white' : 'text-gray-900'}`}>
+                                Sign in to your account
+                            </h1>
+                            <form className="space-y-4 md:space-y-6" onSubmit={submitSignInData}>
+                                <div>
+                                    <label htmlFor="email" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Your email</label>
+                                    <input
+                                        style={{ borderColor: isError && signInData?.email?.length === 0 ? 'red' : '' }}
+                                        type="email"
+                                        name="email"
+                                        id="email"
+                                        className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 block w-full p-2.5 ${isDarkMode ? 'dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' : ''} outline-none`}
+                                        placeholder="name@company.com"
+                                        required=""
+                                        onChange={(e) => {
+                                            setSignInData((prevSendData) => ({
+                                                ...prevSendData,
+                                                email: e.target.value
+                                            }));
+                                        }}
+                                    />
                                 </div>
-                                <Link onClick={toggleForgotPassword} to="/reset-password" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer">Forgot password?</Link>
-                            </div>
+                                {isError && signInData?.email?.length <= 0 && <span style={{ color: 'red', margin: '3px' }}>Please fill the email</span>}
 
-                            <button onClick={submitSignInData} type="button" className="w-full transition delay-50 border-none text-white bg-sky-400 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 outline-none">Sign in</button>
-                            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                                Dont have an account yet? <a onClick={closeSignIn} className="font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer outline-none">Sign up</a>
-                            </p>
-                        </form>
+                                <div>
+                                    <label htmlFor="password" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'dark:text-white' : 'text-gray-900'}`}>Password</label>
+                                    <input
+                                        style={{ borderColor: isError && signInData?.password?.length === 0 ? 'red' : '' }}
+                                        type="password"
+                                        name="password"
+                                        id="password"
+                                        placeholder="••••••••"
+                                        className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ${isDarkMode ? 'dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' : ''} outline-none`}
+                                        required=""
+                                        onChange={(e) => {
+                                            setSignInData((prevSendData) => ({
+                                                ...prevSendData,
+                                                password: e.target.value
+                                            }));
+                                        }}
+                                    />
+                                </div>
+                                {isError && signInData?.password?.length === 0 && <span style={{ color: 'red', margin: '3px' }}>Please fill the password</span>}
+
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-start">
+                                        <div className="flex items-center h-5">
+                                            <input id="remember" aria-describedby="remember" type="checkbox" className={`w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 ${isDarkMode ? 'focus:ring-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800' : 'focus:ring-primary-300'}`} required="" />
+                                        </div>
+                                        <div className={`ml-3 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-500'}`}>
+                                            <label htmlFor="remember" className="text-gray-500 dark:text-gray-300">Remember me</label>
+                                        </div>
+                                    </div>
+                                    <button onClick={toggleForgotPassword} type="button" className={`text-sm font-medium text-primary-600 hover:underline ${isDarkMode ? 'dark:text-primary-500' : ''} cursor-pointer`}>
+                                        Forgot password?
+                                    </button>
+                                </div>
+
+                                <button onClick={submitSignInData} type="button" className={`w-full transition delay-50 border-none text-white bg-sky-400 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${isDarkMode ? 'dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800' : 'dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'} outline-none`}>
+                                    Sign in
+                                </button>
+
+                                <p className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                                    Don't have an account yet?{' '}
+                                    <a onClick={closeSignIn} className={`font-medium text-primary-600 hover:underline ${isDarkMode ? 'dark:text-primary-500' : ''} cursor-pointer outline-none`}>
+                                        Sign up
+                                    </a>
+                                </p>
+                            </form>
+                        </div>
                     </div>
+                    {isAuthnticate && (
+                        <Notification onClose={() => setIsAuthnticate(false)} message={isErrorMessage} condition="warning" />
+                    )}
                 </div>
-            </div>}
+            )}
+
         </section>
     );
 };
