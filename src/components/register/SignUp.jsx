@@ -52,19 +52,19 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
                     Flowbite
                 </a>
                 <div className={`w-full bg-white rounded-lg shadow ${isDarkMode ? 'dark:border' : 'md:border'} md:mt-0 sm:max-w-md xl:p-0 ${isDarkMode ? 'bg-gray-800 border-gray-800' : ''}`}>
-                    <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    <div className={`p-6 space-y-4 md:space-y-6 sm:p-8 ${isDarkMode ? 'bg-gray-600' : 'text-white'}`}>
+                        <h1 className={`text-xl font-bold leading-tight tracking-tight md:text-2xl ${isDarkMode ? 'dark:text-white' : 'text-gray-900'}`}>
                             Create and account
                         </h1>
                         <form className="space-y-4 md:space-y-6" onSubmit={submitSignUpData}>
                             <div>
-                                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
+                                <label htmlFor="username" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Your name</label>
                                 <input
                                     style={{ borderColor: isError && signUpData?.name?.length === 0 ? 'red' : '' }}
                                     type="name"
                                     name="name"
                                     id="name"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+                                    className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 block w-full p-2.5 ${isDarkMode ? 'dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' : ''} outline-none`}
                                     placeholder="your name"
                                     required=""
                                     onChange={(e) => {
@@ -78,13 +78,13 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
                             {isError && signUpData?.name?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill the name</span>}
 
                             <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                                <label htmlFor="email" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Your email</label>
                                 <input
                                     style={{ borderColor: isError && signUpData?.email?.length === 0 ? 'red' : '' }}
                                     type="email"
                                     name="email"
                                     id="email"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+                                    className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 block w-full p-2.5 ${isDarkMode ? 'dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' : ''} outline-none`}
                                     placeholder="name@company.com"
                                     required=""
                                     onChange={(e) => {
@@ -98,14 +98,14 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
                             {isError && signUpData?.email?.length <= 0 && <span style={{ color: "red", margin: "3px" }}>Please fill the email</span>}
 
                             <div>
-                                <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                                <label htmlFor="password" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Password</label>
                                 <input
                                     style={{ borderColor: isError && signUpData?.password?.length === 0 ? 'red' : '' }}
                                     type="password"
                                     name="password"
                                     id="password"
                                     placeholder="••••••••"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+                                    className={`bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 block w-full p-2.5 ${isDarkMode ? 'dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' : ''} outline-none`}
                                     required=""
                                     onChange={(e) => {
                                         setSignUpData((prevSendData) => ({
@@ -119,13 +119,13 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
 
 
                             <div className="relative">
-                                <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirm password</label>
+                                <label htmlFor="confirm-password" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Confirm password</label>
                                 <input
                                     style={{ borderColor: isError && signUpData?.confirmPassword !== signUpData?.password || isError && signUpData?.confirmPassword?.length === 0 ? 'red' : signUpData?.confirmPassword === signUpData?.password && signUpData?.confirmPassword ? 'green' : '' }}
                                     type="password"
                                     name="confirmedPassword"
                                     placeholder="••••••••"
-                                    className="relative bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 outline-none"
+                                    className={`relative bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 block w-full p-2.5 ${isDarkMode ? 'dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' : ''} outline-none`}
                                     required=""
                                     onChange={(e) => {
                                         setSignUpData((prevSendData) => ({
@@ -155,13 +155,13 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
                                     />
                                 </div>
                                 <div className="ml-3 text-sm">
-                                    <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+                                    <label htmlFor="terms" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
                                 </div>
                             </div>
                             {isError && isChecked === false && <span style={{ color: "red", margin: "5px" }}>You need to accept Terms and Conditions</span>}
                             <button onClick={submitSignUpData} type="button" className="w-full text-white transition delay-50 border-none bg-sky-400 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Create an account</button>
 
-                            <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                            <p className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                                 Already have an account? <a onClick={closeSignUp} className="font-medium text-primary-600 hover:underline dark:text-primary-500 cursor-pointer">Sign in here</a>
                             </p>
 
