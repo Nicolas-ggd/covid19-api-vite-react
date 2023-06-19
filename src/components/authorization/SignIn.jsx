@@ -108,9 +108,9 @@ export const SignIn = ({ closeSignIn, themeClass, isDarkMode }) => {
                                             <label htmlFor="remember" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Remember me</label>
                                         </div>
                                     </div>
-                                    <button onClick={toggleForgotPassword} type="button" className={`text-sm font-medium text-primary-600 hover:underline ${isDarkMode ? 'dark:text-primary-500' : ''} cursor-pointer`}>
+                                    <Link onClick={toggleForgotPassword} to="/reset-password" className={`transition text-sm mb-2 ${isDarkMode ? 'dark:text-white' : 'text-gray-900'}`}>
                                         Forgot password?
-                                    </button>
+                                    </Link>
                                 </div>
 
                                 <button onClick={submitSignInData} type="button" className={`w-full transition delay-50 border-none text-white bg-sky-400 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${isDarkMode ? 'dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800' : 'dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'} outline-none`}>
