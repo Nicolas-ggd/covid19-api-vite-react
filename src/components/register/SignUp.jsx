@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-
 import { Notification } from "../notification/Notification";
 
 export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
@@ -9,6 +8,7 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
     const [isChecked, setIsChecked] = useState(false);
     const [isNotified, setIsNotified] = useState(false);
     const [isSend, setIsSend] = useState(false);
+    const [isSuccessSend, setIsSuccessSend] = useState(false);
     const [signUpData, setSignUpData] = useState({
         name: "",
         email: "",
@@ -39,14 +39,15 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
             password: signUpData?.password,
         })
             .then(() => {
+                setIsSend(false);
+                setIsSuccessSend(true);
                 setIsNotified(true);
-                closeSignUp();
             });
     };
 
     return (
         <section className={`bg-grey-50 ${themeClass}`}>
-            {!isSend && <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            {!isSend && !isSuccessSend && <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                 <a href="#" className={`flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white ${isDarkMode ? 'text-white' : ''}`}>
                     <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
                     Flowbite
@@ -177,7 +178,13 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
                         <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
                     </svg>
                     <span className="sr-only">Loading...</span>
-                    <h2 className="p-4">A verification link has been sent to your email. Please check your email and verify your account.</h2>
+                    <h2 className="p-4">A verification link has been send to your email.</h2>
+                </div>
+            </div>}
+            {isSuccessSend && !isSend && <div role="status">
+                <div className="flex flex-col items-center justify-center h-screen w-screen">
+                    <CheckCircleOutlineIcon color="success" fontSize="large"/>
+                    <h2 className="p-3">Please check your email and verify your account.</h2>
                 </div>
             </div>}
         </section>
