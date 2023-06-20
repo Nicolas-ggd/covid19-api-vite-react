@@ -118,7 +118,6 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
                             </div>
                             {isError && signUpData?.password?.length === 0 && <span style={{ color: "red", margin: "3px" }}>Please fill in the password</span>}
 
-
                             <div className="relative">
                                 <label htmlFor="confirm-password" className={`block mb-2 text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Confirm password</label>
                                 <input

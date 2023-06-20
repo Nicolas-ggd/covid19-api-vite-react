@@ -9,7 +9,9 @@ import { Home } from "./components/home/Home";
 import { Auth } from "./components/auth/Auth";
 import { ForgotPassword } from "./components/forgotPassword/ForgotPassword";
 import { SignIn } from "./components/authorization/SignIn";
+import io from 'socket.io-client';
 
+io.connect('http://localhost:8000')
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
