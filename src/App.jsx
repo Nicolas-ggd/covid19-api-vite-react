@@ -30,7 +30,7 @@ function App() {
       <Router>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route element={<Home />} exact path="/home" ></Route>
+            <Route element={<Home themeClass={themeClass} isDarkMode={isDarkMode} />} exact path="/home" ></Route>
           </Route>
           <Route exact path="/" element={<Auth themeClass={themeClass} isDarkMode={isDarkMode} />}></Route>
           <Route exact path="/verify" element={<SignIn />}></Route>

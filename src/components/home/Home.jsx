@@ -1,8 +1,8 @@
 import { Header } from "../header/Header";
 
-export const Home = () => {
+export const Home = ({ themeClass, isDarkMode }) => {
     return (
-        <div>
+        <div className={`w-full h-full bg-grey-50 ${themeClass}`}>
             <Header />
             Home Page
         </div>
