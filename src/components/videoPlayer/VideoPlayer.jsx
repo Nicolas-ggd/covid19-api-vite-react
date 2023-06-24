@@ -1,19 +1,16 @@
-import ReactPlayer from "react-player";
+import { DefaultPlayer as Video } from 'react-html5video';
+import mediaVideo from '../../video/vajashavela.mp4';
+import 'react-html5video/dist/styles.css';
 
 export const VideoPlayer = ({ url, width, height, onLoaded }) => {
-    const handleVideoLoaded = () => {
-        if (onLoaded) {
-          onLoaded();
-        }
-      };
-    
-      return (
-        <ReactPlayer
-          url={url}
-          width={width}
-          height={height}
-          controls
-          onReady={handleVideoLoaded}
-        />
-      );
+  return (
+    <Video
+    style={{width: width, height: height}}
+    autoPlay
+    loop
+    onCanPlayThrough={() => console.log('video play')}
+    >
+      <source src={mediaVideo} type="video/webm"/>
+    </Video>
+  )
 };
