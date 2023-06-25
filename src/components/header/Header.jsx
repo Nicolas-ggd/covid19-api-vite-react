@@ -15,7 +15,6 @@ export const MainHeader = ({ themeClass, isDarkMode }) => {
 
     const handleSearchSubmit = (event) => {
         event.preventDefault();
-        // Perform search logic with the searchValue
         console.log('Searching for:', searchValue);
     };
 

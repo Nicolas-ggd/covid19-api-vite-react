@@ -1,5 +1,4 @@
 import { MainHeader } from "../header/Header";
-import { VideoPlayer } from "../videoPlayer/VideoPlayer";
 
 export const Home = ({ themeClass, isDarkMode }) => {
 

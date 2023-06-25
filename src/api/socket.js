@@ -1,3 +1,5 @@
 import io from 'socket.io-client';
 
-io.connect('http://localhost:8000')
+const ENDPOINT = "http://localhost:8000";
+
+export const socket = io(ENDPOINT).on("connection");

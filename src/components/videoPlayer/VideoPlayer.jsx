@@ -1,6 +1,8 @@
 import { DefaultPlayer as Video } from 'react-html5video';
 import mediaVideo from '../../video/vajashavela.mp4';
 import 'react-html5video/dist/styles.css';
+import { socket } from '../../api/socket';
+
 
 export const VideoPlayer = ({ width, height }) => {
 
@@ -10,6 +12,10 @@ export const VideoPlayer = ({ width, height }) => {
     const minutes = Math.floor(currentTime / 60);
     const seconds = Math.floor(currentTime % 60);
     console.log(`Current Time: ${minutes}:${seconds}`);
+    socket.emit('join', {
+      minutes: minutes,
+      second: seconds
+    })
     
   };
 
