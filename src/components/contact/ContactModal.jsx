@@ -1,5 +1,11 @@
+import { useState } from "react";
 
 export const ContactModal = ({ onClose }) => {
+    const [isContact, setIsContact] = useState({
+        contactType: '',
+        text: ''
+    })
+    
     return (
         <div className="absolute flex align-center justify-center top-0 left-0 right-0 z-50 w-full h-full p-4" style={{ background: '#00000080' }}>
             <div className="relative w-full max-w-md max-h-full py-80">
@@ -13,11 +19,35 @@ export const ContactModal = ({ onClose }) => {
                         <form className="space-y-6">
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Type</label>
-                                <input type="text" name="text" id="password" placeholder="contact type..." className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                                <input
+                                    type="text"
+                                    name="text"
+                                    placeholder="contact type..."
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    required
+                                    onChange={(e) => {
+                                        setIsContact((prevData) => ({
+                                            ...prevData,
+                                            contactType: e.target.value
+                                        }));
+                                    }}
+                                />
                             </div>
                             <div>
-                                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                <textarea type="email" name="text" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="write text..." required />
+                                <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Text</label>
+                                <textarea
+                                    type="text"
+                                    name="text"
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="write text..."
+                                    required
+                                    onChange={(e) => {
+                                        setIsContact((prevData) => ({
+                                            ...prevData,
+                                            text: e.target.value
+                                        }));
+                                    }}
+                                />
                             </div>
                             <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
                         </form>
