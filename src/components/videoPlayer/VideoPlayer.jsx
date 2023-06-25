@@ -12,17 +12,13 @@ export const VideoPlayer = ({ width, height }) => {
     const minutes = Math.floor(currentTime / 60);
     const seconds = Math.floor(currentTime % 60);
     console.log(`Current Time: ${minutes}:${seconds}`);
-    socket.emit('join', {
-      minutes: minutes,
-      second: seconds
-    })
+    socket.emit('join', )
     
   };
 
   return (
     <Video
     style={{width: width, height: height}}
-    autoPlay
     loop
     onCanPlayThrough={() => console.log('video play')}
     onTimeUpdate={handleTimeUpdate}
