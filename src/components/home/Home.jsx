@@ -6,12 +6,13 @@ import { MainHeader } from "../header/Header";
 
 export const Home = ({ themeClass, isDarkMode }) => {
   const [isUserList, setIsUserList] = useState(null);
+  const userToken = localStorage.getItem('access_token');
 
   useEffect(() => {
     const getUserList = async () => {
       await axios.get('http://localhost:8000/user/user-list', {
         headers: {
-          "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySW5mbyI6eyJfaWQiOiI2NDkzNzQ3ZjE1NGZjZjRkYTFmMTBhYTIifSwiaWF0IjoxNjg3NzE1ODQxLCJleHAiOjE2OTAzMDc4NDF9.ztmTR0PNqxkIXaLsB0j57BrXj782d8zRYY62uLblLPk'
+          "Authorization": `Bearer ${userToken}`
         }
       })
         .then((res) => {
