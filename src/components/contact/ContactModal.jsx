@@ -1,7 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
 
+import { Notification } from "../notification/Notification";
+
 export const ContactModal = ({ onClose }) => {
+    const [isNotified, setIsNotified] = useState(false);
+    const [isMessage, setIsMessage] = useState('');
     const [isContact, setIsContact] = useState({
         email: '',
         contactType: '',
@@ -9,10 +13,17 @@ export const ContactModal = ({ onClose }) => {
     })
 
     const sendContactInfo = async () => {
+        setIsNotified(true);
         await axios.post('http://localhost:8000/contact/create-contact', {
             contactType: isContact?.contactType,
-            text: isContact?.text
+            text: isContact?.text,
+            email: isContact?.email
         })
+            .then((res) => {
+                const data = res.data.message;
+                setIsMessage(data);
+                onClose();
+            });
     };
 
     return (
@@ -78,6 +89,7 @@ export const ContactModal = ({ onClose }) => {
                         </form>
                     </div>
                 </div>
+                {isNotified && <Notification onClose={() => setIsNotified(false)} message={isMessage} condition="success" />}
             </div>
         </div>
     )
