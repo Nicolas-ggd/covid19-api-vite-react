@@ -56,13 +56,28 @@ export const Home = ({ themeClass, isDarkMode }) => {
 
         <div className="pt-10">
           <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-            
+
             <div className="flex items-center justify-between mb-4">
-              <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Online Customers</h5>
+              {onlineUserData && <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Online Customers</h5>}
+              {!onlineUserData && (<div role="status" class="max-w-sm animate-pulse">
+                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                <span class="sr-only">Loading...</span>
+              </div>)}
             </div>
 
             <div className="flow-root">
               <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
+                {!onlineUserData && (
+                  <div role="status" class="max-w-sm animate-pulse">
+                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                )}
                 {onlineUserData && onlineUserData?.map((item, index) => {
                   return (
                     <li className="py-3 sm:py-4" key={index}>
@@ -86,7 +101,7 @@ export const Home = ({ themeClass, isDarkMode }) => {
                 })}
               </ul>
             </div>
-            
+
           </div>
         </div>
       </div>
