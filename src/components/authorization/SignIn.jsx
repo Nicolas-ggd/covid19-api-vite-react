@@ -36,6 +36,7 @@ export const SignIn = ({ closeSignIn, themeClass, isDarkMode }) => {
             .then((res) => {
                 const data = res.data;
                 localStorage.setItem('access_token', data?.access_token);
+                localStorage.setItem('userId', data?._id);
                 console.log(data)
                 navigate('/home');
             })

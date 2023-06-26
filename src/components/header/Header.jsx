@@ -8,6 +8,7 @@ import LiveTvIcon from '@mui/icons-material/LiveTv';
 export const MainHeader = ({ themeClassName, isDarkMode }) => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
+    const userId = localStorage.getItem('userId');
 
     const handleSearchChange = (event) => {
         setSearchValue(event.target.value);
@@ -19,9 +20,12 @@ export const MainHeader = ({ themeClassName, isDarkMode }) => {
     };
 
     const userLogOut = async () => {
-        await axios.get("http://localhost:8000/logout", {})
+        await axios.post("http://localhost:8000/logout", {
+            userId: userId
+        })
             .then(() => {
                 localStorage.removeItem('access_token');
+                localStorage.removeItem('userId');
                 navigate('/')
             })
     };
