@@ -7,13 +7,20 @@ export const ContactModal = ({ onClose }) => {
     const [isNotified, setIsNotified] = useState(false);
     const [isMessage, setIsMessage] = useState('');
     const [isError, setIsError] = useState('');
+    const [isEmpty, setIsEmpty] = useState(false);
     const [isContact, setIsContact] = useState({
         email: '',
         contactType: '',
         text: ''
     })
 
-    const sendContactInfo = async () => {
+    const sendContactInfo = async (event) => {
+        if (isContact?.email?.length === 0 || isContact?.contactType?.length === 0 || isContact?.text?.length === 0) {
+            return setIsEmpty(true);
+        }
+
+        event.preventDefault();
+
         await axios.post('http://localhost:8000/contact/create-contact', {
             contactType: isContact?.contactType,
             text: isContact?.text,
@@ -27,7 +34,6 @@ export const ContactModal = ({ onClose }) => {
             })
             .catch((error) => {
                 const errMessage = error?.response?.data?.message;
-                console.log(error.response.data.message)
                 setIsError(errMessage)
             })
     };
@@ -46,6 +52,7 @@ export const ContactModal = ({ onClose }) => {
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter your email</label>
                                 <input
+                                    style={{ borderColor: isEmpty && isContact?.email?.length === 0 ? 'red' : '' }}
                                     type="email"
                                     name="email"
                                     placeholder="example@gmail.com"
@@ -58,10 +65,12 @@ export const ContactModal = ({ onClose }) => {
                                         }));
                                     }}
                                 />
+                                {isEmpty && isContact?.email?.length <= 0 && <p style={{ color: "red" }}>Please enter email</p>}
                             </div>
                             <div>
                                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Type</label>
                                 <input
+                                    style={{ borderColor: isEmpty && isContact?.contactType?.length === 0 ? 'red' : '' }}
                                     type="text"
                                     name="text"
                                     placeholder="contact type..."
@@ -74,10 +83,12 @@ export const ContactModal = ({ onClose }) => {
                                         }));
                                     }}
                                 />
+                                {isEmpty && isContact?.contactType?.length <= 0 && <p style={{ color: "red" }}>Please enter Contact Type</p>}
                             </div>
                             <div>
                                 <label htmlFor="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Text</label>
                                 <textarea
+                                    style={{ borderColor: isEmpty && isContact?.text?.length === 0 ? 'red' : '' }}
                                     type="text"
                                     name="text"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
@@ -90,6 +101,7 @@ export const ContactModal = ({ onClose }) => {
                                         }));
                                     }}
                                 />
+                                {isEmpty && isContact?.text?.length <= 0 && <p style={{ color: "red" }}>Please enter Text</p>}
                             </div>
                             <button type="button" onClick={sendContactInfo} className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
                         </form>
