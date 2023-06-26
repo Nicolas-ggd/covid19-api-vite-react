@@ -12,6 +12,7 @@ import { SignIn } from "./components/authorization/SignIn";
 import { Page404 } from "./components/nonExist/404Page";
 import { VideoPlayer } from "./components/videoPlayer/VideoPlayer";
 import { Contact } from "./components/contact/Contact";
+import { Features } from "./components/features/Features";
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -33,6 +34,7 @@ function App() {
             <Route element={<Home themeClass={themeClass} isDarkMode={isDarkMode} />} exact path="/home"></Route>
             <Route exact path="/movies" element={<VideoPlayer width="100%" height="600px" />}></Route>
             <Route exact path="/contact" element={<Contact themeClass={themeClass} isDarkMode={isDarkMode} />}></Route>
+            <Route exact path="/features" element={<Features themeClass={themeClass} isDarkMode={isDarkMode} />}></Route>
           </Route>
           <Route exact path="/" element={<Auth themeClass={themeClass} isDarkMode={isDarkMode} />}></Route>
           <Route exact path="/verify" element={<SignIn />}></Route>
