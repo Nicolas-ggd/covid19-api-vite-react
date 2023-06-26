@@ -20,7 +20,7 @@ export const Contact = ({ themeClass, isDarkMode }) => {
                         <h1 className="text-3xl">Nicolas Ggd</h1>
                         <p className="font-semibold mb-5">Web Developer</p>
                         <p>Never say never, because the limits like fears are often just an illusion.</p>
-                        <button onClick={contactEmailHandler} className="bg-black rounded-md py-3 px-7 mt-6 text-white">Email Me</button>
+                        <button onClick={contactEmailHandler} className="mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Email Me</button>
                     </div>
                 </div>
             </div>
