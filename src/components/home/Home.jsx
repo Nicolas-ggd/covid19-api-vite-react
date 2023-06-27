@@ -53,14 +53,14 @@ export const Home = ({ themeClass, isDarkMode }) => {
             <p className={`mb-3 font-normal text-gray-500 dark:text-gray-400 ${isDarkMode ? 'text-white' : 'text-grey-900'}`}>Total Users: {isUserList?.length}</p>
           </div>}
           {!isUserList && (
-            <div role="status" class="max-w-sm animate-pulse">
-              <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-              <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
-              <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-              <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
-              <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
-              <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
-              <span class="sr-only">Loading...</span>
+            <div role="status" className="max-w-sm animate-pulse">
+              <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+              <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+              <span className="sr-only">Loading...</span>
             </div>
           )}
         </div>
@@ -70,9 +70,9 @@ export const Home = ({ themeClass, isDarkMode }) => {
 
             <div className="flex items-center justify-between mb-4">
               {onlineUserData && <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Online Customers</h5>}
-              {!onlineUserData && (<div role="status" class="max-w-sm animate-pulse">
-                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                <span class="sr-only">Loading...</span>
+              {!onlineUserData && (<div role="status" className="max-w-sm animate-pulse">
+                <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                <span className="sr-only">Loading...</span>
               </div>)}
             </div>
 
@@ -80,14 +80,14 @@ export const Home = ({ themeClass, isDarkMode }) => {
               <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
 
                 {!onlineUserData && (
-                  <div role="status" class="max-w-sm animate-pulse">
-                    <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
-                    <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
-                    <span class="sr-only">Loading...</span>
+                  <div role="status" className="max-w-sm animate-pulse">
+                    <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[300px] mb-2.5"></div>
+                    <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                    <span className="sr-only">Loading...</span>
                   </div>
                 )}
 
