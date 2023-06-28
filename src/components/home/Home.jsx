@@ -17,14 +17,30 @@ export const Home = ({ themeClass, isDarkMode }) => {
       await axios.get(`https://corona.lmao.ninja/v2/countries?page=${currentPage}&limit=${itemsPerPage}`)
         .then((res) => {
           const data = res.data;
-          setIsCovidData(data);
           setIsLoading(false);
-          setTotalPages(res.headers.get('X-Pagination-Page-Count'));
+          setTotalPages(res.headers['x-pagination-page-count']);
+
+          const pageCount = Math.ceil(data.length / itemsPerPage);
+          setTotalPages(pageCount);
+
+          const startIndex = (currentPage - 1) * itemsPerPage;
+          const endIndex = startIndex + itemsPerPage;
+          const currentPageData = data.slice(startIndex, endIndex);
+
+          setIsCovidData(currentPageData);
         })
     };
 
     covidList();
-  }, [currentPage])
+  }, [currentPage]);
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
 
   return (
     <div className={`w-full h-full bg-grey-50 ${themeClass}`}>
@@ -94,19 +110,21 @@ export const Home = ({ themeClass, isDarkMode }) => {
               })}
             </tbody>
           </table>}
-          {!isLoading && <button
-            disabled={currentPage === 1}
-            onClick={() => setCurrentPage(currentPage - 1)}
-          >
-            Previous Page
-          </button>}
 
-          {!isLoading && <button
-            disabled={currentPage >= totalPages}
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            Next Page
-          </button>}
+          {!isLoading && (
+            <div className="flex pt-6 justify-end">
+              <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                Prev
+              </button>
+              <div className="flex items-center">
+                Page: {currentPage} of {totalPages}
+              </div>
+              <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                Next
+              </button>
+            </div>
+          )}
+
         </div>
       </div>
     </div>
