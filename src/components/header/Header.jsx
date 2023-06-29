@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Switcher } from "../../utils/Switcher";
 
 export const MainHeader = ({ themeClassName, isDarkMode }) => {
     const navigate = useNavigate();
@@ -46,6 +47,7 @@ export const MainHeader = ({ themeClassName, isDarkMode }) => {
                             </ul>
                         </div>
                     </div>
+                    <Switcher />
                 </nav>
             </header>
         </>
