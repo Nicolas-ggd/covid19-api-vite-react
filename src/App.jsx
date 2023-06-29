@@ -7,7 +7,6 @@ import { ForgotPassword } from "./components/forgotPassword/ForgotPassword";
 import { SignIn } from "./components/authorization/SignIn";
 import { Page404 } from "./components/nonExist/404Page";
 import { Contact } from "./components/contact/Contact";
-import { Features } from "./components/features/Features";
 import { CountryDetail } from "./components/countries/CountryDetail";
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route element={<Home />} exact path="/home"></Route>
             <Route exact path="/contact" element={<Contact />}></Route>
-            <Route exact path="/features" element={<Features />}></Route>
             <Route exact path="/:country" element={<CountryDetail />}></Route>
           </Route>
           <Route exact path="/" element={<Auth />}></Route>
