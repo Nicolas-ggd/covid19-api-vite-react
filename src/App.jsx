@@ -1,8 +1,4 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
-
-import LightModeIcon from '@mui/icons-material/LightMode';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
 
 import { PrivateRoutes } from "./utils/PrivateRoutes";
 import { Home } from "./components/home/Home";
