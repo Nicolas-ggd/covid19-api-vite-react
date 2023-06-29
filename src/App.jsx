@@ -15,28 +15,18 @@ import { Features } from "./components/features/Features";
 import { CountryDetail } from "./components/countries/CountryDetail";
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => {
-      const newMode = !prevMode;
-      return newMode;
-    });
-  };
-
-  const themeClass = isDarkMode ? 'bg-gray-900 text-white' : '';
 
   return (
     <div className="w-screen h-screen bg-gray-50">
       <Router>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route element={<Home themeClass={themeClass} isDarkMode={isDarkMode} />} exact path="/home"></Route>
-            <Route exact path="/contact" element={<Contact themeClass={themeClass} isDarkMode={isDarkMode} />}></Route>
-            <Route exact path="/features" element={<Features themeClass={themeClass} isDarkMode={isDarkMode} />}></Route>
+            <Route element={<Home />} exact path="/home"></Route>
+            <Route exact path="/contact" element={<Contact />}></Route>
+            <Route exact path="/features" element={<Features />}></Route>
             <Route exact path="/:country" element={<CountryDetail />}></Route>
           </Route>
-          <Route exact path="/" element={<Auth themeClass={themeClass} isDarkMode={isDarkMode} />}></Route>
+          <Route exact path="/" element={<Auth />}></Route>
           <Route exact path="/verify" element={<SignIn />}></Route>
           <Route exact path="/reset-password" element={<ForgotPassword />}></Route>
           <Route path="*" element={<Page404 />} />

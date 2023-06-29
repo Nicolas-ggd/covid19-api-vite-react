@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { MainHeader } from "../header/Header";
 
-export const Home = ({ themeClass, isDarkMode }) => {
+export const Home = () => {
   const [isCovidData, setIsCovidData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -52,8 +52,8 @@ export const Home = ({ themeClass, isDarkMode }) => {
   );
 
   return (
-    <div className={`w-full h-full bg-grey-50 ${themeClass}`}>
-      <MainHeader themeClass={themeClass} isDarkMode={isDarkMode} />
+    <div className="w-full h-full bg-grey-50 dark:bg-gray-800">
+      <MainHeader />
       <div className="px-10 flex justify-between">
         <form className="absolute my-5 w-80">
           <div className="relative">
