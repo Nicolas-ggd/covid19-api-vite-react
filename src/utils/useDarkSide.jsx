@@ -10,6 +10,10 @@ export const useDarkSide = () => {
         root.classList.remove(colorTheme);
         root.classList.add(theme);
         localStorage.setItem('theme', theme);
+
+        // if(localStorage.getItem('theme')) {
+        //     root.classList.remvoe(colorTheme);
+        // }
     }, [theme, setTheme])
 
     return [colorTheme, setTheme];
