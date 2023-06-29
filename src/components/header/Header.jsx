@@ -1,10 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import axios from "axios";
 
 export const MainHeader = ({ themeClassName, isDarkMode }) => {
     const navigate = useNavigate();
-    const [searchValue, setSearchValue] = useState('');
     const userId = localStorage.getItem('userId');
 
     const userLogOut = async () => {
