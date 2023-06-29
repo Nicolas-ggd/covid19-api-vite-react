@@ -31,10 +31,6 @@ function App() {
           <Route exact path="/reset-password" element={<ForgotPassword />}></Route>
           <Route path="*" element={<Page404 />} />
         </Routes>
-        {/* <div className="absolute top-5 right-5 cursor-pointer" onClick={toggleDarkMode}>
-          {isDarkMode ? <LightModeIcon /> : <DarkModeIcon />}
-        </div> */}
-        
       </Router>
     </div>
   )

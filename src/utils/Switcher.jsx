@@ -18,7 +18,7 @@ export const Switcher = () => {
             <DarkModeSwitch
                 checked={darkSide}
                 onChange={toggleDarkMode}
-                size={30}
+                size={20}
             />
         </>
     );
