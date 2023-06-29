@@ -1,23 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import LogoutIcon from '@mui/icons-material/Logout';
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
 
 export const MainHeader = ({ themeClassName, isDarkMode }) => {
     const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
     const userId = localStorage.getItem('userId');
-
-    const handleSearchChange = (event) => {
-        setSearchValue(event.target.value);
-    };
-
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-        console.log('Searching for:', searchValue);
-    };
 
     const userLogOut = async () => {
         await axios.post("http://localhost:8000/logout", {
@@ -50,9 +38,6 @@ export const MainHeader = ({ themeClassName, isDarkMode }) => {
                             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                                 <li>
                                     <Link to="/home" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</Link>
-                                </li>
-                                <li>
-                                    <Link to="/movies" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Movies</Link>
                                 </li>
                                 <li>
                                     <Link to="/features" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">Features</Link>
