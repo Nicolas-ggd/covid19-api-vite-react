@@ -12,7 +12,7 @@ import { CountryDetail } from "./components/countries/CountryDetail";
 function App() {
 
   return (
-    <div className="w-screen h-screen bg-gray-50">
+    <div className="w-screen h-full bg-gray-50">
       <Router>
         <Routes>
           <Route element={<PrivateRoutes />}>
