@@ -33,6 +33,7 @@ export const CountryDetail = () => {
             <div className="pt-20 h-screen w-screen bg-white border-gray-200 dark:bg-gray-800">
                 {!isLoading && <div className="p-4 bg-white rounded-lg md:p-8 dark:bg-gray-800" id="about" role="tabpanel" aria-labelledby="about-tab">
                     <h1 className="mb-3 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white">Continent: {countryData?.continent}</h1>
+                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src={countryData?.countryInfo?.flag} alt="No Image"/>
                     <h2 className="mb-3 font-extrabold tracking-tight text-gray-900 dark:text-white">Country: {countryData?.country}</h2>
                     <p className="mb-3 text-gray-500 dark:text-gray-400">Population: {countryData?.population}</p>
                     <p className="mb-3 text-gray-500 dark:text-gray-400">Cases: {countryData?.cases}</p>
