@@ -51,18 +51,14 @@ export const SignIn = ({ closeSignIn }) => {
         <section className="bg-gray-50 dark:bg-gray-800">
             {!isForgot && (
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                    <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                        <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
-                        Flowbite
-                    </a>
                     <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8 dark:bg-gray-800 dark:border dark:rounded-md">
-                            <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl dark:text-white">
+                            <h1 className="text-xl font-bold leading-tight tracking-tight md:text-2xl text-gray-900 dark:text-white">
                                 Sign in to your account
                             </h1>
                             <form className="space-y-4 md:space-y-6" onSubmit={submitSignInData}>
                                 <div>
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium dark:text-white">Your email</label>
+                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                     <input
                                         style={{ borderColor: isError && signInData?.email?.length === 0 ? 'red' : '' }}
                                         type="email"

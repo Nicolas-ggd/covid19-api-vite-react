@@ -22,8 +22,7 @@ export const MainHeader = () => {
                 <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800" style={{ position: 'fixed', width: '100%', top: 0, zIndex: 999 }}>
                     <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                         <Link to="/home" className="flex items-center">
-                            <img src="https://flowbite.com/docs/images/logo.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-                            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Home</span>
                         </Link>
                         <div className="flex items-center lg:order-2">
                             <a onClick={userLogOut} className="block mx-5 pr-5 ml-5 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700 cursor-pointer">Log Out</a>

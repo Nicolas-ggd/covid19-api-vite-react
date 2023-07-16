@@ -48,10 +48,6 @@ export const SignUp = ({ closeSignUp, themeClass, isDarkMode }) => {
     return (
         <section className={`bg-grey-50 ${themeClass}`}>
             {!isSend && !isSuccessSend && <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-                <a href="#" className={`flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white ${isDarkMode ? 'text-white' : ''}`}>
-                    <img className="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo" />
-                    Flowbite
-                </a>
                 <div className={`w-full bg-white rounded-lg shadow ${isDarkMode ? 'dark:border' : 'md:border'} md:mt-0 sm:max-w-md xl:p-0 ${isDarkMode ? 'bg-gray-800 border-gray-800' : ''}`}>
                     <div className={`p-6 space-y-4 md:space-y-6 sm:p-8 ${isDarkMode ? 'bg-gray-600' : 'text-white'}`}>
                         <h1 className={`text-xl font-bold leading-tight tracking-tight md:text-2xl ${isDarkMode ? 'dark:text-white' : 'text-gray-900'}`}>
