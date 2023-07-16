@@ -53,7 +53,7 @@ export const Home = () => {
   );
 
   return (
-    <div className="w-full h-screen bg-grey-50 dark:bg-gray-800">
+    <div className="w-full h-screen bg-grey-50 dark:bg-gray-800 transition duration-300">
       <MainHeader />
       <div className="mx-10 py-20 flex justify-between">
         {isLoading && <div role="status" className="fixed top-50 w-full h-full">
@@ -74,8 +74,8 @@ export const Home = () => {
           </div>
         </form>
         <div className="w-full h-full mt-20 relative overflow-x-auto shadow-md sm:rounded-lg">
-          {!isLoading && <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+          {!isLoading && <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 transition duration-300">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 transition duration-300">
               <tr>
                 <th scope="col" className="px-6 py-3">
                   Country
@@ -103,7 +103,7 @@ export const Home = () => {
             <tbody>
               {isCovidData && filteredData?.map((item, index) => {
                 return (
-                  <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700" key={index}>
+                  <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700 transition duration-300" key={index}>
                     <th scope="row" className="flex items-center px-3 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                       <img src={item?.countryInfo?.flag} alt='No Img' style={{ width: "50px", height: "50px", borderRadius: "50px" }} />
                       <span className="px-2">{item?.country}</span>
@@ -133,7 +133,7 @@ export const Home = () => {
           </table>}
 
           {!isLoading && (
-            <div className="dark:bg-gray-800 flex py-6 px-2 justify-end">
+            <div className="dark:bg-gray-800 flex py-6 px-2 justify-end transition duration-300">
               <p className="cursor-pointer dark:text-white" onClick={handlePrevPage} disabled={currentPage === 1}>
                 Prev
               </p>
